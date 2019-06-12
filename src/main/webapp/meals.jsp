@@ -7,39 +7,49 @@
   Time: 15:04
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Meals page</title>
 </head>
 <body>
 
-<table>
+
+<table border="1">
     <h1>List of meals</h1>
     <tr>
         <th>Description</th>
-        <th>Date and Time</th>
+        <th>Date</th>
+        <th>Time</th>
         <th>Calories</th>
         <th>Is exceeded?</th>
     </tr>
     <c:forEach items="${mealList}" var="meal">
         <tr>
             <td>
-                <b>
-                    <c:out value="${meal.getDescription()}"/>
-                </b>
+                <c:out value="${meal.description}"/>
             </td>
             <td>
-                <c:out value="${meal.getDateTime()}"/>
+                <c:out value="${meal.dateTime.toLocalDate()}"/>
             </td>
             <td>
-                <c:out value="${meal.getCalories()}"/>
+                <c:out value="${meal.dateTime.toLocalTime()}"/>
             </td>
             <td>
-                <c:out value="${meal.isExcess()}"/>
+                <c:out value="${meal.calories}"/>
+            </td>
+            <td bgcolor="${meal.exceed ? "red" : "green"}">
+                <c:out value="${meal.exceed}"/>
             </td>
         </tr>
+
     </c:forEach>
 </table>
+<br>
+
+<form method="get" action="newMeal">
+    <button type="submit">Add new meal...</button>
+</form>
+
 </body>
 </html>
