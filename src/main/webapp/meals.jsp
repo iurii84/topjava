@@ -23,6 +23,8 @@
         <th>Time</th>
         <th>Calories</th>
         <th>Is exceeded?</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     <c:forEach items="${mealList}" var="meal">
         <tr>
@@ -40,6 +42,18 @@
             </td>
             <td bgcolor="${meal.exceed ? "red" : "green"}">
                 <c:out value="${meal.exceed}"/>
+            </td>
+            <td>
+                <form action="<c:url value="/update"/>" method="post">
+                    <input type="hidden" name="id" value="${meal.id}">
+                    <input type="submit" value="update">
+                </form>
+            </td>
+            <td>
+                <form action="<c:url value="/delete"/>" method="post">
+                    <input type="hidden" name="id" value="${meal.id}">
+                    <input type="submit" value="delete">
+                </form>
             </td>
         </tr>
 

@@ -27,18 +27,22 @@ public class NewMealServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         log.debug("NewMealServlet - doPost");
+
+
         LocalDate date = LocalDate.parse(req.getParameter("date"));
         LocalTime time = LocalTime.parse(req.getParameter("time"));
         LocalDateTime dateTime = LocalDateTime.of(date, time);
 
-        Meal meal = new Meal(dateTime,
-                req.getParameter("description"),
-                Integer.parseInt(req.getParameter("calories")));
+        synchronized (this) {
+            Meal meal = new Meal(dateTime,
+                    req.getParameter("description"),
+                    Integer.parseInt(req.getParameter("calories")));
 
-        log.debug("New meal created");
+            log.debug("New meal created");
 
-        MealCrud mealCrud = new MealCrud();
-        mealCrud.create(meal);
+            MealCrud mealCrud = new MealCrud();
+            mealCrud.create(meal);
+        }
 
         log.debug("New meal sended to CRUD");
 
