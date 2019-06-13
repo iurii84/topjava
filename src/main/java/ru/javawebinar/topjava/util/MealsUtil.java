@@ -28,4 +28,9 @@ public class MealsUtil {
                 .map(meal -> createWithExcess(meal.getId(), meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
     }
+
+
+    private static MealTo createWithExcess(long id, Meal meal, boolean excess) {
+        return new MealTo(id, meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+    }
 }
