@@ -44,7 +44,7 @@
                 <c:out value="${meal.exceed}"/>
             </td>
             <td>
-                <form action="<c:url value="/update"/>" method="post">
+                <form action="<c:url value="/update"/>" method="get">
                     <input type="hidden" name="id" value="${meal.id}">
                     <input type="submit" value="update">
                 </form>

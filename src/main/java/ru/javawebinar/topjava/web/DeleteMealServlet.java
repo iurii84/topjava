@@ -11,8 +11,8 @@ import java.io.IOException;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class DeleteMeal extends HttpServlet {
-    private static final Logger log = getLogger(DeleteMeal.class);
+public class DeleteMealServlet extends HttpServlet {
+    private static final Logger log = getLogger(DeleteMealServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
