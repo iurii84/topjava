@@ -46,7 +46,7 @@ public class MealServlet extends HttpServlet {
         List<Meal> listOfMeals = new ArrayList<>();
         mealMap.forEach((k, v) -> listOfMeals.add(v));
 
-        List<MealTo> mealsWithExcess = MealsUtil.getFilteredWithExcess(listOfMeals, LocalTime.of(0, 0), LocalTime.of(23, 59), 2000);
+        List<MealTo> mealsWithExcess = MealsUtil.getFilteredWithExcess(listOfMeals, LocalTime.MIN, LocalTime.MAX, 2000);
         System.out.println(mealsWithExcess);
 
         request.setAttribute("mealList", mealsWithExcess);
