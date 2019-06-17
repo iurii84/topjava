@@ -53,14 +53,21 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
         return UsersUtil.sortByName(repository.values());
     }
 
+
     @Override
     public User getByEmail(String email) {
+        User user = null;
         log.info("getByEmail {}", email);
         for (Map.Entry<Integer, User> entry : repository.entrySet()) {
             if (entry.getValue().getEmail().equals(email)) {
-                return entry.getValue();
+                user = entry.getValue();
             }
         }
-        return null;
+        return user;
     }
+
+//    public static void main(String[] args) {
+//        InMemoryUserRepositoryImpl repository = new InMemoryUserRepositoryImpl();
+//        System.out.println(repository.getByEmail("iurii84@gmail.com"));
+//    }
 }

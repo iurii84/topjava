@@ -21,6 +21,13 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Meals</h2>
+
+    Enter your email:
+    <form method="post" action="auth">
+        <input type="email" size=30 name="email" required>
+        <button type="submit">Authorise me</button>
+    </form>
+
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
