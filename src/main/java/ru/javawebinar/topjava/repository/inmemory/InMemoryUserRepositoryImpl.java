@@ -19,6 +19,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     private Map<Integer, User> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
 
+
     {
         UsersUtil.USERS.forEach(this::save);
     }
@@ -49,7 +50,8 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getAll() {
-        log.info("getAll");
+        log.info("getAll Users");
+
         return UsersUtil.sortByName(repository.values());
     }
 
@@ -66,8 +68,5 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
         return user;
     }
 
-//    public static void main(String[] args) {
-//        InMemoryUserRepositoryImpl repository = new InMemoryUserRepositoryImpl();
-//        System.out.println(repository.getByEmail("iurii84@gmail.com"));
-//    }
+
 }
