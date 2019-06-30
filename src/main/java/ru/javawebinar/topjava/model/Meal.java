@@ -21,7 +21,7 @@ import java.time.LocalTime;
 })
 
 @Entity
-@Table(name = "meals")
+@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date_time"})})
 public class Meal extends AbstractBaseEntity {
 
     public static final String ALL_SORTED = "Meal.getAll";
