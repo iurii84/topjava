@@ -12,8 +12,8 @@ import java.util.List;
 @Repository
 public class DataJpaMealRepository implements MealRepository {
 
-    private CrudMealRepository mealRepository;
-    private CrudUserRepository userRepository;
+    private final CrudMealRepository mealRepository;
+    private final CrudUserRepository userRepository;
 
     @Autowired
     public DataJpaMealRepository(CrudMealRepository mealRepository, CrudUserRepository userRepository) {
