@@ -21,12 +21,12 @@ private static final Logger log = getLogger(JspMealController.class);
     JspMealController(MealService mealService){
         this.mealService = mealService;
     }
-    private int userId = SecurityUtil.authUserId();
+
 
     @GetMapping("/meals")
     public String getAllMeals(Model model) {
-        log.info("getAll for user {}", userId);
-        model.addAttribute("meals",  MealsUtil.getWithExcess(mealService.getAll(userId), SecurityUtil.authUserCaloriesPerDay()));
+        log.info("getAll for user {}", SecurityUtil.authUserId());
+        model.addAttribute("meals",  MealsUtil.getWithExcess(mealService.getAll(SecurityUtil.authUserId()), SecurityUtil.authUserCaloriesPerDay()));
         return "meals";
     }
 }
