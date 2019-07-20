@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static org.slf4j.LoggerFactory.getLogger;
+import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
 
 @Controller
 public class JspMealController {
@@ -48,11 +49,24 @@ public class JspMealController {
                 Integer.parseInt(request.getParameter("calories")));
 
         if (StringUtils.isEmpty(request.getParameter("id"))) {
+            log.warn("id id empty - then create new meal");
             mealService.create(meal, SecurityUtil.authUserId());
         } else {
-            mealService.update(meal, getId(request));
+            log.warn("id is NOT empty - then update meal");
+            assureIdConsistent(meal, getId(request));
+            mealService.update(meal, SecurityUtil.authUserId());
         }
         return "redirect:/meals";
+    }
+
+    @GetMapping("meals/update")
+    public String updateMeal(HttpServletRequest request) {
+        int id = getId(request);
+        int userId = SecurityUtil.authUserId();
+        Meal meal = mealService.get(id, userId);
+        System.out.println(meal.getUser().getId());
+        request.setAttribute("meal", meal);
+        return "mealForm";
     }
 
 
