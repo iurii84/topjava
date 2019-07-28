@@ -69,6 +69,14 @@ public class JspMealController {
         return "mealForm";
     }
 
+    @GetMapping("meals/delete")
+    public String deleteMeal(HttpServletRequest request) {
+        int id = getId(request);
+        int userId = SecurityUtil.authUserId();
+        mealService.delete(id, userId);
+        return "redirect:/meals";
+    }
+
 
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
