@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.web.meal;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +28,12 @@ public class MealRestController extends AbstractMealController {
 
     @GetMapping("/{id}")
     public Meal getMeal(@PathVariable int id) {
-        log.info("get Meal {}", id );
+        log.info("get Meal {}", id);
         return super.get(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Meal> createMeal(@NotNull @RequestBody Meal meal) throws URISyntaxException {
+    public ResponseEntity<Meal> createMeal(@RequestBody Meal meal) throws URISyntaxException {
         meal.setDateTime(LocalDateTime.now());
         System.out.println(meal.toString());
         log.info("create {}", meal);
@@ -42,8 +41,7 @@ public class MealRestController extends AbstractMealController {
         Meal created = super.create(meal);
         if (created == null) {
             return ResponseEntity.notFound().build();
-        }
-        else {
+        } else {
             URI uriOfNewResource = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path(REST_MEAL_URL + "/{id}")
