@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
@@ -35,20 +37,26 @@ public class Meal extends AbstractBaseEntity {
     @Column(name = "description", nullable = false)
     @NotBlank
     @Size(min = 2, max = 120)
+    @JsonProperty("description")
     private String description;
 
     @Column(name = "calories", nullable = false)
     @Range(min = 10, max = 5000)
+    @JsonProperty("calories")
+
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
+    @JsonIgnore
     private User user;
 
     public Meal() {
     }
+
+
 
     public Meal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
