@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.web.meal;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,9 @@ import ru.javawebinar.topjava.to.MealTo;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
@@ -65,6 +68,14 @@ public class MealRestController extends AbstractMealController {
                            @PathVariable int id) {
         log.info("Update meal " + id + " new meal is " + meal.toString());
         super.update(meal, id);
+    }
+
+    @PostMapping(value = "/getbetween")
+    public List<MealTo> getBetween(@RequestParam(value = "startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+                                   @RequestParam(value = "endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
+                                   @RequestParam(value = "startTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime startTime,
+                                   @RequestParam(value = "endTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime endTime) {
+        return super.getBetween(startDate, startTime, endDate, endTime);
     }
 
 }
