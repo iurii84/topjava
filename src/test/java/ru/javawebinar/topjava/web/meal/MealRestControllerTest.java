@@ -23,7 +23,7 @@ class MealRestControllerTest extends AbstractMealControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                // .andExpect(contentJson(MEALS))
         ;
-
+        
     }
 
     @Test
