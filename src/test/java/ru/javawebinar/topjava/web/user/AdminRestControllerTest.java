@@ -78,6 +78,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
     @Test
     void testGetAll() throws Exception {
         mockMvc.perform(get(REST_URL))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(ADMIN, USER));

@@ -1,7 +1,11 @@
 package ru.javawebinar.topjava;
 
+import org.springframework.test.web.servlet.ResultMatcher;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.to.MealTo;
 
+import static ru.javawebinar.topjava.TestUtil.readFromJsonMvcResult;
+import static ru.javawebinar.topjava.TestUtil.readListFromJsonMvcResult;
 import java.time.Month;
 import java.util.List;
 
@@ -42,5 +46,11 @@ public class MealTestData {
 
     public static void assertMatch(Iterable<Meal> actual, Iterable<Meal> expected) {
         assertThat(actual).usingElementComparatorIgnoringFields("user", "excess").isEqualTo(expected);
+    }
+    public static ResultMatcher contentJson(List<Meal> expected) {
+        return result -> assertMatch(readListFromJsonMvcResult(result, Meal.class), expected);
+    }
+    public static ResultMatcher contentJson(Meal expected) {
+        return result -> assertMatch(readFromJsonMvcResult(result, Meal.class), expected);
     }
 }
