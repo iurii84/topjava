@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.web.meal;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,21 @@ public class MealRestController extends AbstractMealController {
             return ResponseEntity.created(uriOfNewResource).body(created);
         }
 
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteMeal(@PathVariable int id) {
+        log.info("Delete meal " + id);
+        super.delete(id);
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void updateMeal(@RequestBody Meal meal,
+                           @PathVariable int id) {
+        log.info("Update meal " + id + " new meal is " + meal.toString());
+        super.update(meal, id);
     }
 
 }
